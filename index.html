@@ -20,8 +20,14 @@
   --shadow:0 30px 90px rgba(0,0,0,.65);
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   color:var(--text);
@@ -30,40 +36,88 @@ body{
   font-family:Inter,Arial,sans-serif;
   overflow-x:hidden;
 }
+
 body:before{
   content:"";
-  position:fixed;inset:0;z-index:9999;pointer-events:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  pointer-events:none;
   opacity:.045;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
 body:after{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
-  background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(255,255,255,.012) 4px);
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9998;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 3px,
+    rgba(255,255,255,.012) 4px
+  );
 }
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit}
-img,video{max-width:100%}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+  color:inherit;
+}
+
+img,video{
+  max-width:100%;
+}
+
+
+/* =========================
+   INTRO
+========================= */
 
 #intro{
-  position:fixed;inset:0;z-index:5000;
-  display:grid;place-items:center;
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  display:grid;
+  place-items:center;
   background:#030303;
   transition:opacity 1s,visibility 1s;
 }
-#intro.hide{opacity:0;visibility:hidden}
-.intro{text-align:center;padding:25px}
+
+#intro.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.intro{
+  text-align:center;
+  padding:25px;
+}
+
 .intro-kicker{
   font:11px Cinzel,serif;
   letter-spacing:.4em;
   color:#8d8880;
 }
+
 .intro h1{
   font:700 clamp(45px,11vw,120px) Cinzel,serif;
   letter-spacing:.08em;
   margin:18px 0;
   text-shadow:0 0 40px #8e101955;
 }
-.intro p{color:#777;margin:0 0 32px}
+
+.intro p{
+  color:#777;
+  margin:0 0 32px;
+}
+
 .enter{
   border:1px solid var(--red);
   background:transparent;
@@ -72,444 +126,82 @@ img,video{max-width:100%}
   letter-spacing:.3em;
   transition:.35s;
 }
+
 .enter:hover{
   background:var(--red);
   box-shadow:0 0 45px #98172266;
   transform:translateY(-2px);
 }
 
+
+/* =========================
+   NAV
+========================= */
+
 nav{
-  position:fixed;z-index:1200;top:0;left:0;right:0;
+  position:fixed;
+  z-index:1200;
+  top:0;
+  left:0;
+  right:0;
   padding:18px 5vw;
-  display:flex;align-items:center;justify-content:space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   transition:.4s;
 }
+
 nav.scrolled{
   background:rgba(5,5,5,.9);
   border-bottom:1px solid var(--line);
   backdrop-filter:blur(15px);
 }
-.logo{font:700 19px Cinzel;letter-spacing:.16em}
-.nav-links{display:flex;gap:30px}
+
+.logo{
+  font:700 19px Cinzel;
+  letter-spacing:.16em;
+}
+
+.nav-links{
+  display:flex;
+  gap:30px;
+}
+
 .nav-links a{
   font:11px Cinzel;
   letter-spacing:.18em;
   color:#aaa;
   position:relative;
 }
+
 .nav-links a:after{
-  content:"";position:absolute;right:0;bottom:-8px;
-  width:0;height:1px;background:var(--red-bright);
+  content:"";
+  position:absolute;
+  right:0;
+  bottom:-8px;
+  width:0;
+  height:1px;
+  background:var(--red-bright);
   transition:.3s;
 }
-.nav-links a:hover:after{width:100%}
+
+.nav-links a:hover:after{
+  width:100%;
+}
+
 .menu{
-  display:none;background:none;border:1px solid var(--line);
-  padding:8px 12px;cursor:pointer;
-}
-
-/* Floating music button */
-#musicWidget{
-  position:fixed;
-  left:18px;bottom:18px;
-  z-index:2500;
-  width:270px;
-  background:rgba(7,7,7,.94);
-  border:1px solid #711018;
-  box-shadow:0 15px 50px #000b;
-  backdrop-filter:blur(15px);
-  padding:14px;
-  transition:.35s;
-}
-#musicWidget:hover{box-shadow:0 15px 60px #000,0 0 25px #98172233}
-.music-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.music-caption{
-  font:9px Cinzel;
-  letter-spacing:.22em;
-  color:#a81b25;
-}
-.music-name{
-  font-size:12px;color:#ddd;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  margin-top:4px;
-}
-.music-status{font-size:9px;color:#777}
-.music-controls{display:flex;gap:6px;margin-top:11px}
-.music-controls button{
-  width:36px;height:31px;
+  display:none;
+  background:none;
   border:1px solid var(--line);
-  background:#101010;
-  cursor:pointer;
-  font-size:10px;
-  transition:.25s;
-}
-.music-controls button:hover{border-color:var(--red);background:#1a0809}
-#musicSelect{
-  width:100%;margin-top:9px;
-  background:#0d0d0d;color:#aaa;
-  border:1px solid var(--line);
-  padding:7px;font-size:10px;
-  outline:none;
-}
-#ytPlayer{
-  position:absolute;
-  width:1px;height:1px;
-  left:-10000px;top:-10000px;
-  opacity:0;pointer-events:none;
-}
-
-/* General */
-section{max-width:1450px;margin:auto;padding:115px 7vw;position:relative}
-.section-label{
-  font:10px Cinzel;
-  letter-spacing:.32em;
-  color:#9d1821;
-}
-.title{
-  font:700 clamp(36px,6vw,74px) Cinzel,serif;
-  margin:12px 0 42px;
-}
-.rule{
-  height:1px;
-  background:linear-gradient(90deg,var(--red),transparent);
-  margin-bottom:35px;
-}
-
-/* Hero */
-.hero{
-  max-width:none;
-  min-height:100vh;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  overflow:hidden;
-}
-.hero-fallback{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 50% 45%,#300b0f 0,#100708 30%,#050505 70%);
-}
-.hero-video{
-  position:absolute;
-  inset:-5%;
-  width:110%;height:110%;
-  object-fit:cover;
-  filter:brightness(.2) grayscale(.85) contrast(1.25);
-  animation:cinematicZoom 18s ease-in-out infinite alternate;
-}
-.hero:after{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(circle,transparent 12%,rgba(0,0,0,.85) 90%),
-    linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.7));
-}
-.hero-content{position:relative;z-index:2;max-width:1000px}
-.hero-kicker{font:10px Cinzel;letter-spacing:.45em;color:#a09a92}
-.hero h1{
-  font:700 clamp(55px,12vw,155px) Cinzel;
-  line-height:.88;
-  letter-spacing:.04em;
-  margin:20px 0;
-  animation:titleReveal 1.5s both;
-}
-.hero h1 span{color:var(--red-bright)}
-.hero-description{
-  color:#aaa;
-  font-size:clamp(14px,2vw,20px);
-  letter-spacing:.08em;
-  animation:fadeUp 1.5s .3s both;
-}
-.scroll-link{
-  display:inline-block;
-  margin-top:55px;
-  color:#666;
-  font:10px Cinzel;
-  letter-spacing:.25em;
-  animation:pulse 2.5s infinite;
-}
-@keyframes cinematicZoom{to{transform:scale(1.12)}}
-@keyframes titleReveal{
-  from{opacity:0;transform:translateY(30px);filter:blur(10px)}
-  to{opacity:1;transform:none;filter:none}
-}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-@keyframes pulse{50%{opacity:.45}}
-
-/* About */
-.case-file{
-  position:relative;
-  background:linear-gradient(145deg,#151311,#0a0a09);
-  border:1px solid var(--line);
-  padding:clamp(25px,5vw,60px);
-  box-shadow:var(--shadow);
-}
-.case-file:before{
-  content:"PERSONAL FILE / 001";
-  position:absolute;top:18px;left:20px;
-  color:#57524c;font:9px Cinzel;letter-spacing:.2em;
-  transform:rotate(-2deg);
-}
-.about-grid{
-  display:grid;
-  grid-template-columns:260px 1fr;
-  gap:55px;
-  align-items:center;
-}
-.profile{
-  width:100%;
-  aspect-ratio:3/4;
-  background:#0b0b0b center/cover no-repeat;
-  border:8px solid #171614;
-  outline:1px solid #5d554c;
-  box-shadow:15px 15px 0 #030303;
-  filter:grayscale(.25);
-}
-.about-heading{
-  font:600 clamp(25px,4vw,45px) Cinzel;
-  margin:0 0 13px;
-}
-.about-description{
-  color:#aaa;
-  line-height:2;
-  font-size:14px;
-  max-width:750px;
-}
-.properties{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-top:28px;
-}
-.property{
-  border-top:1px solid var(--line);
-  padding:13px 0;
-}
-.property b{
-  display:block;
-  color:#777;
-  font:9px Cinzel;
-  letter-spacing:.18em;
-  margin-bottom:5px;
-}
-.property span{font-size:13px;color:#ddd}
-
-/* World */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:14px;
-}
-.card{
-  height:285px;
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:#0c0c0c;
-  transition:.5s;
-}
-.card img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  filter:grayscale(.8) brightness(.42);
-  transition:.7s;
-}
-.card:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(transparent 15%,#000);
-}
-.card-content{
-  position:absolute;z-index:2;
-  right:18px;left:18px;bottom:18px;
-}
-.card h3{font:600 19px Cinzel;margin:0 0 7px}
-.card p{font-size:11px;color:#aaa;line-height:1.8;margin:0}
-.card:hover{
-  transform:translateY(-10px) rotate(-.4deg);
-  border-color:#85131c;
-  box-shadow:0 20px 50px #000;
-}
-.card:hover img{transform:scale(1.1);filter:grayscale(.15) brightness(.55)}
-
-/* Gallery */
-.gallery{columns:3 250px;column-gap:20px}
-.photo{
-  break-inside:avoid;
-  background:#ded8cc;
-  padding:10px 10px 30px;
-  margin:0 0 20px;
-  box-shadow:0 15px 35px #0009;
-  cursor:pointer;
-  transform:rotate(var(--r));
-  transition:.4s;
-}
-.photo img{
-  display:block;width:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  filter:sepia(.45) contrast(1.08);
-}
-.photo figcaption{
-  color:#171717;
-  text-align:center;
-  font:10px Cinzel;
-  margin-top:10px;
-}
-.photo:hover{
-  transform:rotate(0) scale(1.04);
-  position:relative;z-index:5;
-}
-
-/* Minds */
-.minds{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-  position:relative;
-}
-.mind{
-  height:450px;
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-}
-.mind img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  filter:grayscale(.55) brightness(.4);
-  transition:.6s;
-}
-.mind:first-child img{filter:grayscale(.35) sepia(.3) hue-rotate(315deg) brightness(.42)}
-.mind:nth-child(2) img{filter:grayscale(.7) hue-rotate(160deg) brightness(.42)}
-.mind:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(transparent 25%,#000);
-}
-.mind-info{position:absolute;z-index:2;right:25px;bottom:22px}
-.mind-info small{font:9px Cinzel;color:#888;letter-spacing:.2em}
-.mind-info h3{font:700 31px Cinzel;margin:7px 0}
-.mind-info p{font-size:12px;color:#aaa}
-.connector{
-  position:absolute;z-index:4;
-  top:50%;left:calc(50% - 55px);
-  width:110px;height:1px;
-  background:var(--red);
-  box-shadow:0 0 25px var(--red);
-}
-
-/* Video */
-.video-box{
-  background:#080808;
-  border:1px solid var(--line);
-  padding:10px;
-  box-shadow:var(--shadow);
-}
-.video-box video{
-  display:block;
-  width:100%;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  background:#020202;
-}
-.video-caption{
-  padding:22px 10px 12px;
-  border-top:1px solid var(--line);
-  margin-top:10px;
-}
-.video-caption h3{
-  font:600 21px Cinzel;
-  margin:0 0 8px;
-}
-.video-caption p{
-  color:#999;
-  font-size:12px;
-  line-height:1.9;
-  margin:0;
-}
-
-/* Lightbox */
-.lightbox{
-  position:fixed;inset:0;z-index:4500;
-  display:none;place-items:center;
-  background:rgba(0,0,0,.95);
-  padding:25px;
-}
-.lightbox.open{display:grid}
-.lightbox img{max-width:90vw;max-height:82vh;border:7px solid #141414}
-.lb{
-  position:absolute;
-  width:46px;height:46px;
-  background:#111;
-  border:1px solid var(--line);
+  padding:8px 12px;
   cursor:pointer;
 }
-.lb:hover{border-color:var(--red)}
-.lb-close{top:20px;left:20px}
-.lb-prev{right:20px}
-.lb-next{left:20px}
 
-/* Scroll reveal */
-.reveal{
-  opacity:0;
-  transform:translateY(35px) scale(.985);
-  filter:blur(5px);
-  transition:1s cubic-bezier(.2,.75,.2,1);
-}
-.reveal.show{
-  opacity:1;
-  transform:none;
-  filter:none;
-}
 
-/* Footer */
-footer{
-  text-align:center;
-  border-top:1px solid var(--line);
-  padding:90px 20px 55px;
-  color:#777;
-}
-.end{font:13px Cinzel;letter-spacing:.35em;color:#aaa}
-.type{margin-top:15px;font-size:12px;min-height:20px}
+/* =========================
+   CIRCULAR MUSIC
+========================= */
 
-/* Responsive */
-@media(max-width:1000px){
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .about-grid{grid-template-columns:200px 1fr}
-}
-@media(max-width:650px){
-  nav{padding:15px 18px}
-  .menu{display:block}
-  .nav-links{
-    display:none;
-    position:absolute;top:60px;right:15px;left:15px;
-    background:#090909;border:1px solid var(--line);
-    padding:18px;flex-direction:column;
-  }
-  .nav-links.open{display:flex}
-  section{padding:85px 20px}
-  .hero{min-height:92vh}
-  .hero h1{font-size:16vw}
-  .about-grid{grid-template-columns:1fr}
-  .profile{width:190px;margin:auto}
-  .properties{grid-template-columns:1fr}
-  .cards{grid-template-columns:1fr}
-  .minds{grid-template-columns:1fr}
-  .mind{height:360px}
-  .connector{display:none}
-  #musicWidget{
-    left:10px;right:10px;bottom:10px;width:auto;
-  }
-}
-@media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{
-    animation:none!important;
-    transition:none!important;
-    scroll-behavior:auto!important;
-  }
-}
-
-/* Permanent circular music control */
 .music-orb{
   position:fixed;
   left:24px;
@@ -521,6 +213,7 @@ footer{
   align-items:center;
   justify-content:center;
 }
+
 .music-main{
   width:64px;
   height:64px;
@@ -531,20 +224,39 @@ footer{
   display:grid;
   place-items:center;
   cursor:pointer;
-  box-shadow:0 10px 35px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.05);
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.55),
+    inset 0 0 0 1px rgba(255,255,255,.05);
   backdrop-filter:blur(12px);
-  transition:transform .35s ease, border-color .35s ease, background .35s ease;
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    background .35s ease;
 }
+
 .music-main:hover{
   transform:scale(1.08);
   border-color:rgba(255,255,255,.55);
   background:rgba(30,30,33,.96);
 }
+
+.music-main.playing{
+  border-color:#c32934;
+  box-shadow:
+    0 0 25px rgba(195,41,52,.3),
+    0 10px 35px rgba(0,0,0,.55);
+}
+
 .music-note{
   font-size:25px;
   line-height:1;
   animation:musicPulse 2s ease-in-out infinite;
 }
+
+.music-main:not(.playing) .music-note{
+  animation-play-state:paused;
+}
+
 .music-options{
   position:absolute;
   left:50%;
@@ -556,10 +268,12 @@ footer{
   transform:translateX(-50%);
   transition:opacity .25s ease;
 }
+
 .music-orb.open .music-options{
   opacity:1;
   pointer-events:auto;
 }
+
 .track-orb{
   position:absolute;
   left:50%;
@@ -571,524 +285,1825 @@ footer{
   border:1px solid rgba(255,255,255,.22);
   background:rgba(16,16,18,.94);
   color:#ddd;
-  font:600 11px/1 Inter, sans-serif;
+  font:600 11px/1 Inter,sans-serif;
   letter-spacing:.08em;
   cursor:pointer;
   opacity:0;
   transform:translateY(18px) scale(.65);
-  transition:transform .38s cubic-bezier(.2,.8,.2,1), opacity .28s ease, background .25s ease;
+  transition:
+    transform .38s cubic-bezier(.2,.8,.2,1),
+    opacity .28s ease,
+    background .25s ease;
 }
-.music-orb.open .track-orb{opacity:1; transform:translateY(0) scale(1);}
-.music-orb.open .track-orb:nth-child(1){transform:translate(-42px,0) scale(1);}
-.music-orb.open .track-orb:nth-child(2){transform:translate(0,-50px) scale(1);}
-.music-orb.open .track-orb:nth-child(3){transform:translate(42px,0) scale(1);}
-.track-orb:hover,.track-orb.active{
+
+.music-orb.open .track-orb{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+.music-orb.open .track-orb:nth-child(1){
+  transform:translateY(0) scale(1);
+}
+
+.track-orb:hover,
+.track-orb.active{
   background:#a40000;
   color:#fff;
   border-color:#d33;
 }
+
 .music-label{
   position:absolute;
   left:76px;
   bottom:20px;
   white-space:nowrap;
   color:rgba(255,255,255,.72);
-  font:600 9px/1 Inter, sans-serif;
+  font:600 9px/1 Inter,sans-serif;
   letter-spacing:.18em;
   opacity:.7;
 }
+
 @keyframes musicPulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.12)}
-}
-@media(max-width:650px){
-  .music-orb{left:16px;bottom:16px}
-  .music-label{display:none}
+  0%,100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.12);
+  }
 }
 
+
+/* =========================
+   GENERAL
+========================= */
+
+section{
+  max-width:1450px;
+  margin:auto;
+  padding:115px 7vw;
+  position:relative;
+}
+
+.section-label{
+  font:10px Cinzel;
+  letter-spacing:.32em;
+  color:#9d1821;
+}
+
+.title{
+  font:700 clamp(36px,6vw,74px) Cinzel,serif;
+  margin:12px 0 42px;
+}
+
+.rule{
+  height:1px;
+  background:linear-gradient(90deg,var(--red),transparent);
+  margin-bottom:35px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  max-width:none;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  overflow:hidden;
+}
+
+.hero-fallback{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 45%,#300b0f 0,#100708 30%,#050505 70%);
+}
+
+.hero-video{
+  position:absolute;
+  inset:-5%;
+  width:110%;
+  height:110%;
+  object-fit:cover;
+  filter:brightness(.2) grayscale(.85) contrast(1.25);
+  animation:cinematicZoom 18s ease-in-out infinite alternate;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle,transparent 12%,rgba(0,0,0,.85) 90%),
+    linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.7));
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:1000px;
+}
+
+.hero-kicker{
+  font:10px Cinzel;
+  letter-spacing:.45em;
+  color:#a09a92;
+}
+
+.hero h1{
+  font:700 clamp(55px,12vw,155px) Cinzel;
+  line-height:.88;
+  letter-spacing:.04em;
+  margin:20px 0;
+  animation:titleReveal 1.5s both;
+}
+
+.hero h1 span{
+  color:var(--red-bright);
+}
+
+.hero-description{
+  color:#aaa;
+  font-size:clamp(14px,2vw,20px);
+  letter-spacing:.08em;
+  animation:fadeUp 1.5s .3s both;
+}
+
+.scroll-link{
+  display:inline-block;
+  margin-top:55px;
+  color:#666;
+  font:10px Cinzel;
+  letter-spacing:.25em;
+  animation:pulse 2.5s infinite;
+}
+
+@keyframes cinematicZoom{
+  to{
+    transform:scale(1.12);
+  }
+}
+
+@keyframes titleReveal{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+    filter:blur(10px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+@keyframes pulse{
+  50%{
+    opacity:.45;
+  }
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.case-file{
+  position:relative;
+  background:linear-gradient(145deg,#151311,#0a0a09);
+  border:1px solid var(--line);
+  padding:clamp(25px,5vw,60px);
+  box-shadow:var(--shadow);
+}
+
+.case-file:before{
+  content:"PERSONAL FILE / 001";
+  position:absolute;
+  top:18px;
+  left:20px;
+  color:#57524c;
+  font:9px Cinzel;
+  letter-spacing:.2em;
+  transform:rotate(-2deg);
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:55px;
+  align-items:center;
+}
+
+.profile{
+  width:100%;
+  aspect-ratio:3/4;
+  background:#0b0b0b center/cover no-repeat;
+  border:8px solid #171614;
+  outline:1px solid #5d554c;
+  box-shadow:15px 15px 0 #030303;
+  filter:grayscale(.25);
+}
+
+.about-heading{
+  font:600 clamp(25px,4vw,45px) Cinzel;
+  margin:0 0 13px;
+}
+
+.about-description{
+  color:#aaa;
+  line-height:2;
+  font-size:14px;
+  max-width:750px;
+}
+
+.properties{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:28px;
+}
+
+.property{
+  border-top:1px solid var(--line);
+  padding:13px 0;
+}
+
+.property b{
+  display:block;
+  color:#777;
+  font:9px Cinzel;
+  letter-spacing:.18em;
+  margin-bottom:5px;
+}
+
+.property span{
+  font-size:13px;
+  color:#ddd;
+}
+
+
+/* =========================
+   WORLD
+========================= */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+}
+
+.card{
+  height:285px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#0c0c0c;
+  transition:.5s;
+}
+
+.card img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(.8) brightness(.42);
+  transition:.7s;
+}
+
+.card:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent 15%,#000);
+}
+
+.card-content{
+  position:absolute;
+  z-index:2;
+  right:18px;
+  left:18px;
+  bottom:18px;
+}
+
+.card h3{
+  font:600 19px Cinzel;
+  margin:0 0 7px;
+}
+
+.card p{
+  font-size:11px;
+  color:#aaa;
+  line-height:1.8;
+  margin:0;
+}
+
+.card:hover{
+  transform:translateY(-10px) rotate(-.4deg);
+  border-color:#85131c;
+  box-shadow:0 20px 50px #000;
+}
+
+.card:hover img{
+  transform:scale(1.1);
+  filter:grayscale(.15) brightness(.55);
+}
+
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery{
+  columns:3 250px;
+  column-gap:20px;
+}
+
+.photo{
+  break-inside:avoid;
+  background:#ded8cc;
+  padding:10px 10px 30px;
+  margin:0 0 20px;
+  box-shadow:0 15px 35px #0009;
+  cursor:pointer;
+  transform:rotate(var(--r));
+  transition:.4s;
+}
+
+.photo img{
+  display:block;
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  filter:sepia(.45) contrast(1.08);
+}
+
+.photo figcaption{
+  color:#171717;
+  text-align:center;
+  font:10px Cinzel;
+  margin-top:10px;
+}
+
+.photo:hover{
+  transform:rotate(0) scale(1.04);
+  position:relative;
+  z-index:5;
+}
+
+
+/* =========================
+   MINDS
+========================= */
+
+.minds{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  position:relative;
+}
+
+.mind{
+  height:450px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+}
+
+.mind img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(.55) brightness(.4);
+  transition:.6s;
+}
+
+.mind:first-child img{
+  filter:grayscale(.35) sepia(.3) hue-rotate(315deg) brightness(.42);
+}
+
+.mind:nth-child(2) img{
+  filter:grayscale(.7) hue-rotate(160deg) brightness(.42);
+}
+
+.mind:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent 25%,#000);
+}
+
+.mind-info{
+  position:absolute;
+  z-index:2;
+  right:25px;
+  bottom:22px;
+}
+
+.mind-info small{
+  font:9px Cinzel;
+  color:#888;
+  letter-spacing:.2em;
+}
+
+.mind-info h3{
+  font:700 31px Cinzel;
+  margin:7px 0;
+}
+
+.mind-info p{
+  font-size:12px;
+  color:#aaa;
+}
+
+.connector{
+  position:absolute;
+  z-index:4;
+  top:50%;
+  left:calc(50% - 55px);
+  width:110px;
+  height:1px;
+  background:var(--red);
+  box-shadow:0 0 25px var(--red);
+}
+
+
+/* =========================
+   VIDEO
+========================= */
+
+.video-box{
+  background:#080808;
+  border:1px solid var(--line);
+  padding:10px;
+  box-shadow:var(--shadow);
+}
+
+.video-box video{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  background:#020202;
+}
+
+.video-caption{
+  padding:22px 10px 12px;
+  border-top:1px solid var(--line);
+  margin-top:10px;
+}
+
+.video-caption h3{
+  font:600 21px Cinzel;
+  margin:0 0 8px;
+}
+
+.video-caption p{
+  color:#999;
+  font-size:12px;
+  line-height:1.9;
+  margin:0;
+}
+
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:4500;
+  display:none;
+  place-items:center;
+  background:rgba(0,0,0,.95);
+  padding:25px;
+}
+
+.lightbox.open{
+  display:grid;
+}
+
+.lightbox img{
+  max-width:90vw;
+  max-height:82vh;
+  border:7px solid #141414;
+}
+
+.lb{
+  position:absolute;
+  width:46px;
+  height:46px;
+  background:#111;
+  border:1px solid var(--line);
+  cursor:pointer;
+}
+
+.lb:hover{
+  border-color:var(--red);
+}
+
+.lb-close{
+  top:20px;
+  left:20px;
+}
+
+.lb-prev{
+  right:20px;
+}
+
+.lb-next{
+  left:20px;
+}
+
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px) scale(.985);
+  filter:blur(5px);
+  transition:1s cubic-bezier(.2,.75,.2,1);
+}
+
+.reveal.show{
+  opacity:1;
+  transform:none;
+  filter:none;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+  border-top:1px solid var(--line);
+  padding:90px 20px 55px;
+  color:#777;
+}
+
+.end{
+  font:13px Cinzel;
+  letter-spacing:.35em;
+  color:#aaa;
+}
+
+.type{
+  margin-top:15px;
+  font-size:12px;
+  min-height:20px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .about-grid{
+    grid-template-columns:200px 1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  nav{
+    padding:15px 18px;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:60px;
+    right:15px;
+    left:15px;
+    background:#090909;
+    border:1px solid var(--line);
+    padding:18px;
+    flex-direction:column;
+  }
+
+  .nav-links.open{
+    display:flex;
+  }
+
+  section{
+    padding:85px 20px;
+  }
+
+  .hero{
+    min-height:92vh;
+  }
+
+  .hero h1{
+    font-size:16vw;
+  }
+
+  .about-grid{
+    grid-template-columns:1fr;
+  }
+
+  .profile{
+    width:190px;
+    margin:auto;
+  }
+
+  .properties{
+    grid-template-columns:1fr;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .minds{
+    grid-template-columns:1fr;
+  }
+
+  .mind{
+    height:360px;
+  }
+
+  .connector{
+    display:none;
+  }
+
+  .music-orb{
+    left:16px;
+    bottom:16px;
+  }
+
+  .music-label{
+    display:none;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *:before,
+  *:after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+
+}
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
+
+<!-- =========================
+     INTRO
+========================= -->
+
 <div id="intro">
+
   <div class="intro">
-    <div class="intro-kicker">PERSONAL ARCHIVE / 001</div>
-    <h1>MOAZYOURE</h1>
-    <p>Welcome to my world.</p>
-    <button class="enter" id="enter">ENTER</button>
+
+    <div class="intro-kicker">
+      PERSONAL ARCHIVE / 001
+    </div>
+
+    <h1>
+      MOAZYOURE
+    </h1>
+
+    <p>
+      Welcome to my world.
+    </p>
+
+    <button class="enter" id="enter">
+      ENTER
+    </button>
+
   </div>
+
 </div>
 
-<!-- NAVBAR -->
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
 <nav id="nav">
-  <a href="#home" class="logo">MOAZYOURE</a>
-  <button class="menu" id="menu">MENU</button>
+
+  <a href="#home" class="logo">
+    MOAZYOURE
+  </a>
+
+  <button class="menu" id="menu">
+    MENU
+  </button>
+
   <div class="nav-links" id="navLinks">
-    <a href="#home">HOME</a>
-    <a href="#about">ABOUT</a>
-    <a href="#world">WORLD</a>
-    <a href="#gallery">GALLERY</a>
-    <a href="#video">VIDEO</a>
+
+    <a href="#home">
+      HOME
+    </a>
+
+    <a href="#about">
+      ABOUT
+    </a>
+
+    <a href="#world">
+      WORLD
+    </a>
+
+    <a href="#gallery">
+      GALLERY
+    </a>
+
+    <a href="#video">
+      VIDEO
+    </a>
+
   </div>
+
 </nav>
 
-<!-- FLOATING MUSIC BUTTON -->
-<div id="musicWidget">
-  <div class="music-top">
-    <div>
-      <div class="music-caption">MY SOUNDTRACK</div>
-      <div class="music-name" id="musicName">TRACK 01</div>
-    </div>
-    <div class="music-status" id="musicStatus">READY</div>
+
+<!-- =========================
+     CIRCULAR MUSIC
+========================= -->
+
+<div class="music-orb" id="musicOrb">
+
+  <button
+    class="music-main"
+    id="musicMain"
+    aria-label="Play music"
+    title="Music"
+  >
+
+    <span class="music-note">
+      ♪
+    </span>
+
+  </button>
+
+  <div class="music-options">
+
+    <button
+      class="track-orb active"
+      data-track="0"
+      title="Track 01"
+    >
+      01
+    </button>
+
   </div>
 
-  <div class="music-controls">
-    <button id="musicPrev" aria-label="Previous">◀◀</button>
-    <button id="musicPlay" aria-label="Play or pause">▶</button>
-    <button id="musicNext" aria-label="Next">▶▶</button>
-    <button id="musicMute" aria-label="Mute">VOL</button>
+  <div
+    class="music-label"
+    id="musicLabel"
+  >
+    TRACK 01
   </div>
 
-  <select id="musicSelect" aria-label="Choose a song"></select>
-  <div id="ytPlayer"></div>
 </div>
+
+
+<!-- LOCAL MUSIC -->
+
+<audio
+  id="musicAudio"
+  preload="metadata"
+>
+  <source
+    src="assets/music/track-01.mp3"
+    type="audio/mpeg"
+  >
+</audio>
+
 
 <main>
 
-<!-- HERO -->
+
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero" id="home">
+
   <div class="hero-fallback"></div>
 
-  <!-- Put your background video here -->
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="assets/video/background.mp4" type="video/mp4">
+  <video
+    class="hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+  >
+
+    <source
+      src="assets/video/background.mp4"
+      type="video/mp4"
+    >
+
   </video>
 
   <div class="hero-content reveal">
-    <div class="hero-kicker">PERSONAL IDENTITY / DARK ARCHIVE</div>
-    <h1>MOAZ<span>YOURE</span></h1>
-    <p class="hero-description">Just another mind in a world full of noise.</p>
-    <a class="scroll-link" href="#about">SCROLL TO ENTER THE FILE</a>
+
+    <div class="hero-kicker">
+      PERSONAL IDENTITY / DARK ARCHIVE
+    </div>
+
+    <h1>
+      MOAZ<span>YOURE</span>
+    </h1>
+
+    <p class="hero-description">
+      Just another mind in a world full of noise.
+    </p>
+
+    <a
+      class="scroll-link"
+      href="#about"
+    >
+      SCROLL TO ENTER THE FILE
+    </a>
+
   </div>
+
 </section>
 
-<!-- ABOUT -->
+
+<!-- =========================
+     ABOUT
+========================= -->
+
 <section id="about">
-  <div class="section-label">01 / PERSONAL FILE</div>
-  <h2 class="title">ABOUT ME</h2>
+
+  <div class="section-label">
+    01 / PERSONAL FILE
+  </div>
+
+  <h2 class="title">
+    ABOUT ME
+  </h2>
+
   <div class="rule"></div>
 
   <div class="case-file reveal">
+
     <div class="about-grid">
-      <div class="profile" style="background-image:url('assets/images/profile.jpg')"></div>
+
+      <div
+        class="profile"
+        style="background-image:url('assets/images/profile.jpg')"
+      ></div>
 
       <div>
-        <h3 class="about-heading">MAZEN YOUSRY</h3>
+
+        <h3 class="about-heading">
+          MAZEN YOUSRY
+        </h3>
 
         <div class="about-description">
+
           I am MOAZYOURE — a curious mind who enjoys turning ideas into experiences.
           I am interested in coding, technology, anime, music, design and games.
           I like dark atmospheres, old visual styles, mysterious stories and details
           that make a simple idea feel different.
+
           <br><br>
+
           I am still learning, experimenting and building my own style.
           This website is a small digital archive of the things I enjoy and the person
           I am becoming through creativity and code.
+
         </div>
 
         <div class="properties">
-          <div class="property"><b>NAME</b><span>Mazen Yousry</span></div>
-          <div class="property"><b>USERNAME</b><span>MOAZYOURE</span></div>
-          <div class="property"><b>INTERESTS</b><span>Coding / Anime / Music</span></div>
-          <div class="property"><b>CREATIVE SIDE</b><span>Design / Ideas / Visuals</span></div>
-          <div class="property"><b>PERSONALITY</b><span>Curious / Quiet / Creative</span></div>
-          <div class="property"><b>STATUS</b><span>Online / Learning</span></div>
+
+          <div class="property">
+            <b>NAME</b>
+            <span>Mazen Yousry</span>
+          </div>
+
+          <div class="property">
+            <b>USERNAME</b>
+            <span>MOAZYOURE</span>
+          </div>
+
+          <div class="property">
+            <b>INTERESTS</b>
+            <span>Coding / Anime / Music</span>
+          </div>
+
+          <div class="property">
+            <b>CREATIVE SIDE</b>
+            <span>Design / Ideas / Visuals</span>
+          </div>
+
+          <div class="property">
+            <b>PERSONALITY</b>
+            <span>Curious / Quiet / Creative</span>
+          </div>
+
+          <div class="property">
+            <b>STATUS</b>
+            <span>Online / Learning</span>
+          </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- WORLD -->
+
+<!-- =========================
+     WORLD
+========================= -->
+
 <section id="world">
-  <div class="section-label">02 / MY WORLD</div>
-  <h2 class="title">THINGS I LIKE</h2>
+
+  <div class="section-label">
+    02 / MY WORLD
+  </div>
+
+  <h2 class="title">
+    THINGS I LIKE
+  </h2>
+
   <div class="rule"></div>
 
   <div class="cards">
-    <article class="card reveal">
-      <img src="assets/images/coding.jpg" alt="Coding">
-      <div class="card-content"><h3>CODING</h3><p>Building ideas with code and turning concepts into something real.</p></div>
-    </article>
 
     <article class="card reveal">
-      <img src="assets/images/anime.jpg" alt="Anime">
-      <div class="card-content"><h3>ANIME</h3><p>Stories, characters, worlds and the details behind them.</p></div>
+
+      <img
+        src="assets/images/coding.jpg"
+        alt="Coding"
+      >
+
+      <div class="card-content">
+
+        <h3>
+          CODING
+        </h3>
+
+        <p>
+          Building ideas with code and turning concepts into something real.
+        </p>
+
+      </div>
+
     </article>
 
-    <article class="card reveal">
-      <img src="assets/images/music.jpg" alt="Music">
-      <div class="card-content"><h3>MUSIC</h3><p>The soundtrack that changes the atmosphere of a moment.</p></div>
-    </article>
 
     <article class="card reveal">
-      <img src="assets/images/design.jpg" alt="Design">
-      <div class="card-content"><h3>DESIGN</h3><p>Dark visuals, typography, composition and small details.</p></div>
+
+      <img
+        src="assets/images/anime.jpg"
+        alt="Anime"
+      >
+
+      <div class="card-content">
+
+        <h3>
+          ANIME
+        </h3>
+
+        <p>
+          Stories, characters, worlds and the details behind them.
+        </p>
+
+      </div>
+
     </article>
 
+
     <article class="card reveal">
-      <img src="assets/images/games.jpg" alt="Games">
-      <div class="card-content"><h3>GAMES</h3><p>Different worlds, challenges and stories waiting to be explored.</p></div>
+
+      <img
+        src="assets/images/music.jpg"
+        alt="Music"
+      >
+
+      <div class="card-content">
+
+        <h3>
+          MUSIC
+        </h3>
+
+        <p>
+          The soundtrack that changes the atmosphere of a moment.
+        </p>
+
+      </div>
+
     </article>
+
+
+    <article class="card reveal">
+
+      <img
+        src="assets/images/design.jpg"
+        alt="Design"
+      >
+
+      <div class="card-content">
+
+        <h3>
+          DESIGN
+        </h3>
+
+        <p>
+          Dark visuals, typography, composition and small details.
+        </p>
+
+      </div>
+
+    </article>
+
+
+    <article class="card reveal">
+
+      <img
+        src="assets/images/games.jpg"
+        alt="Games"
+      >
+
+      <div class="card-content">
+
+        <h3>
+          GAMES
+        </h3>
+
+        <p>
+          Different worlds, challenges and stories waiting to be explored.
+        </p>
+
+      </div>
+
+    </article>
+
   </div>
+
 </section>
 
-<!-- GALLERY -->
+
+<!-- =========================
+     GALLERY
+========================= -->
+
 <section id="gallery">
-  <div class="section-label">03 / MEMORIES</div>
-  <h2 class="title">GALLERY</h2>
+
+  <div class="section-label">
+    03 / MEMORIES
+  </div>
+
+  <h2 class="title">
+    GALLERY
+  </h2>
+
   <div class="rule"></div>
 
   <div class="gallery">
-    <figure class="photo reveal" style="--r:-2deg">
-      <img src="assets/images/gallery-01.jpg" alt="Memory 01">
-      <figcaption>FILE 01 / MEMORY</figcaption>
+
+    <figure
+      class="photo reveal"
+      style="--r:-2deg"
+    >
+
+      <img
+        src="assets/images/gallery-1.jpg"
+        alt="Memory 01"
+      >
+
+      <figcaption>
+        FILE 01 / MEMORY
+      </figcaption>
+
     </figure>
-    <figure class="photo reveal" style="--r:2deg">
-      <img src="assets/images/gallery-02.jpg" alt="Memory 02">
-      <figcaption>FILE 02 / MEMORY</figcaption>
+
+
+    <figure
+      class="photo reveal"
+      style="--r:2deg"
+    >
+
+      <img
+        src="assets/images/gallery-2.jpg"
+        alt="Memory 02"
+      >
+
+      <figcaption>
+        FILE 02 / MEMORY
+      </figcaption>
+
     </figure>
-    <figure class="photo reveal" style="--r:-1deg">
-      <img src="assets/images/gallery-03.jpg" alt="Memory 03">
-      <figcaption>FILE 03 / MEMORY</figcaption>
+
+
+    <figure
+      class="photo reveal"
+      style="--r:-1deg"
+    >
+
+      <img
+        src="assets/images/gallery-3.jpg"
+        alt="Memory 03"
+      >
+
+      <figcaption>
+        FILE 03 / MEMORY
+      </figcaption>
+
     </figure>
-    <figure class="photo reveal" style="--r:3deg">
-      <img src="assets/images/gallery-04.jpg" alt="Memory 04">
-      <figcaption>FILE 04 / MEMORY</figcaption>
+
+
+    <figure
+      class="photo reveal"
+      style="--r:3deg"
+    >
+
+      <img
+        src="assets/images/gallery-4.jpg"
+        alt="Memory 04"
+      >
+
+      <figcaption>
+        FILE 04 / MEMORY
+      </figcaption>
+
     </figure>
+
   </div>
+
 </section>
 
-<!-- TWO MINDS -->
+
+<!-- =========================
+     TWO MINDS
+========================= -->
+
 <section>
-  <div class="section-label">04 / TWO MINDS</div>
-  <h2 class="title">THE TWO MINDS</h2>
+
+  <div class="section-label">
+    04 / TWO MINDS
+  </div>
+
+  <h2 class="title">
+    THE TWO MINDS
+  </h2>
+
   <div class="rule"></div>
 
   <div class="minds">
+
     <article class="mind reveal">
-      <img src="assets/images/light.jpg" alt="Light Yagami">
+
+      <img
+        src="assets/images/light.jpg"
+        alt="Light Yagami"
+      >
+
       <div class="mind-info">
-        <small>CASE SUBJECT 01</small>
-        <h3>LIGHT YAGAMI</h3>
-        <p>Sharp, calculated and dramatic visual inspiration.</p>
+
+        <small>
+          CASE SUBJECT 01
+        </small>
+
+        <h3>
+          LIGHT YAGAMI
+        </h3>
+
+        <p>
+          Sharp, calculated and dramatic visual inspiration.
+        </p>
+
       </div>
+
     </article>
+
 
     <div class="connector"></div>
 
+
     <article class="mind reveal">
-      <img src="assets/images/l.jpg" alt="L Lawliet">
+
+      <img
+        src="assets/images/l.jpg"
+        alt="L Lawliet"
+      >
+
       <div class="mind-info">
-        <small>CASE SUBJECT 02</small>
-        <h3>L LAWLIET</h3>
-        <p>Detective atmosphere, mystery and investigation.</p>
+
+        <small>
+          CASE SUBJECT 02
+        </small>
+
+        <h3>
+          L LAWLIET
+        </h3>
+
+        <p>
+          Detective atmosphere, mystery and investigation.
+        </p>
+
       </div>
+
     </article>
+
   </div>
+
 </section>
 
-<!-- VIDEO -->
+
+<!-- =========================
+     VIDEO
+========================= -->
+
 <section id="video">
-  <div class="section-label">05 / MY VIDEO</div>
-  <h2 class="title">WATCH</h2>
+
+  <div class="section-label">
+    05 / MY VIDEO
+  </div>
+
+  <h2 class="title">
+    WATCH
+  </h2>
+
   <div class="rule"></div>
 
   <div class="video-box reveal">
-    <!-- Put your own video in assets/video/my-video.mp4 -->
-    <video controls playsinline preload="metadata" poster="assets/images/video-poster.jpg">
-      <source src="assets/video/my-video.mp4" type="video/mp4">
+
+    <video
+      controls
+      playsinline
+      preload="metadata"
+      poster="assets/images/video-poster.jpg"
+    >
+
+      <source
+        src="assets/video/my-video.mp4"
+        type="video/mp4"
+      >
+
       Your browser does not support HTML5 video.
+
     </video>
 
     <div class="video-caption">
-      <h3>A MOMENT FROM MY WORLD</h3>
+
+      <h3>
+        A MOMENT FROM MY WORLD
+      </h3>
+
       <p>
         A personal visual space for videos, edits, memories and moments that represent
         my style. Replace this text with your own words whenever you want.
       </p>
+
     </div>
+
   </div>
+
 </section>
 
 </main>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lb lb-close" id="lbClose">×</button>
-  <button class="lb lb-prev" id="lbPrev">→</button>
-  <img id="lightboxImg" alt="Gallery preview">
-  <button class="lb lb-next" id="lbNext">←</button>
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div
+  class="lightbox"
+  id="lightbox"
+>
+
+  <button
+    class="lb lb-close"
+    id="lbClose"
+  >
+    ×
+  </button>
+
+  <button
+    class="lb lb-prev"
+    id="lbPrev"
+  >
+    →
+  </button>
+
+  <img
+    id="lightboxImg"
+    alt="Gallery preview"
+  >
+
+  <button
+    class="lb lb-next"
+    id="lbNext"
+  >
+    ←
+  </button>
+
 </div>
 
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
-  <div class="end">END OF FILE</div>
-  <div class="type" id="typing"></div>
-  <div style="margin-top:22px;font-size:10px">© MOAZYOURE</div>
+
+  <div class="end">
+    END OF FILE
+  </div>
+
+  <div
+    class="type"
+    id="typing"
+  ></div>
+
+  <div style="margin-top:22px;font-size:10px">
+    © MOAZYOURE
+  </div>
+
 </footer>
 
+
 <script>
-/* ==========================================================
-   WEBSITE SETTINGS
-   ========================================================== */
+
+/* =========================
+   SETTINGS
+========================= */
+
 const SETTINGS = {
-  name: "MOAZYOURE",
-  fullName: "MAZEN YOUSRY",
 
-  songs: [
-    { title: "TRACK 01", id: "5VFCkzCW4vA" },
-    { title: "TRACK 02", id: "DIIXSCb_RpE" },
-    { title: "TRACK 03", id: "iRZEQoMk3B0" }
-  ],
+  name:"MOAZYOURE",
 
-  backgroundVideo: "assets/video/background.mp4",
-  pageVideo: "assets/video/my-video.mp4",
-  profileImage: "assets/images/profile.jpg"
+  fullName:"MAZEN YOUSRY",
+
+  music:"assets/music/track-01.mp3",
+
+  backgroundVideo:
+    "assets/video/background.mp4",
+
+  pageVideo:
+    "assets/video/my-video.mp4",
+
+  profileImage:
+    "assets/images/profile.jpg"
+
 };
-/* ========================================================== */
 
-const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
 
-/* Intro */
+/* =========================
+   HELPERS
+========================= */
+
+const $ = s =>
+  document.querySelector(s);
+
+const $$ = s =>
+  [...document.querySelectorAll(s)];
+
+
+/* =========================
+   INTRO
+========================= */
+
 $("#enter").onclick = () => {
+
   $("#intro").classList.add("hide");
 
-  /*
-    Browsers normally block audible autoplay until the user interacts
-    with the page. The ENTER click is used as that interaction.
-  */
-  startSong(0, true);
+  setTimeout(() => {
 
-  setTimeout(() => $("#intro").style.display = "none", 1100);
+    $("#intro").style.display = "none";
+
+  },1100);
+
 };
 
-/* Navbar */
-addEventListener("scroll", () => {
-  $("#nav").classList.toggle("scrolled", scrollY > 50);
+
+/* =========================
+   NAVBAR
+========================= */
+
+addEventListener("scroll",() => {
+
+  $("#nav").classList.toggle(
+    "scrolled",
+    scrollY > 50
+  );
+
 });
 
-$("#menu").onclick = () => $("#navLinks").classList.toggle("open");
-$("#navLinks").addEventListener("click", () => $("#navLinks").classList.remove("open"));
 
-/* Scroll reveal */
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) entry.target.classList.add("show");
-  });
-},{threshold:.12});
+$("#menu").onclick = () => {
 
-$$(".reveal").forEach(el => revealObserver.observe(el));
+  $("#navLinks").classList.toggle("open");
 
-/* ==========================================================
-   YOUTUBE EMBEDDED MUSIC
-   ========================================================== */
+};
 
-let player = null;
-let playerReady = false;
-let songIndex = 0;
-let muted = false;
 
-const select = $("#musicSelect");
+$("#navLinks").addEventListener(
+  "click",
+  () => {
 
-SETTINGS.songs.forEach((song,index) => {
-  const option = document.createElement("option");
-  option.value = index;
-  option.textContent =
-    String(index + 1).padStart(2,"0") + " — " + song.title;
-  select.appendChild(option);
-});
+    $("#navLinks").classList.remove("open");
 
-function updateMusicUI(){
-  $("#musicName").textContent = SETTINGS.songs[songIndex].title;
-  select.value = songIndex;
-}
+  }
+);
 
-updateMusicUI();
 
-/* Load official YouTube IFrame Player API */
-const ytScript = document.createElement("script");
-ytScript.src = "https://www.youtube.com/iframe_api";
-document.head.appendChild(ytScript);
+/* =========================
+   SCROLL REVEAL
+========================= */
 
-window.onYouTubeIframeAPIReady = function(){
-  player = new YT.Player("ytPlayer",{
-    width:"1",
-    height:"1",
-    videoId:SETTINGS.songs[0].id,
-    playerVars:{
-      autoplay:0,
-      controls:0,
-      rel:0,
-      playsinline:1,
-      enablejsapi:1,
-      loop:1,
-      modestbranding:1
-    },
-    events:{
-      onReady:function(){
-        playerReady = true;
-        updateMusicUI();
-      },
-      onStateChange:function(event){
-        if(event.data === YT.PlayerState.PLAYING){
-          $("#musicPlay").textContent = "Ⅱ";
-          $("#musicStatus").textContent = "PLAYING";
-        }else{
-          $("#musicPlay").textContent = "▶";
-          $("#musicStatus").textContent = "PAUSED";
+const revealObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          entry.target.classList.add("show");
+
         }
-      }
+
+      });
+
+    },
+    {
+      threshold:.12
     }
-  });
-};
+  );
 
-function startSong(index, shouldPlay=true){
-  songIndex = (index + SETTINGS.songs.length) % SETTINGS.songs.length;
-  updateMusicUI();
 
-  if(!playerReady) return;
+$$(".reveal").forEach(el => {
 
-  player.loadVideoById(SETTINGS.songs[songIndex].id);
+  revealObserver.observe(el);
 
-  if(muted) player.mute();
-  else player.unMute();
+});
 
-  if(shouldPlay) player.playVideo();
-}
 
-$("#musicPlay").onclick = () => {
-  if(!playerReady) return;
+/* =========================
+   LOCAL MUSIC PLAYER
+========================= */
 
-  if(player.getPlayerState() === YT.PlayerState.PLAYING){
-    player.pauseVideo();
-  }else{
-    player.playVideo();
+const musicAudio =
+  document.getElementById("musicAudio");
+
+const musicOrb =
+  document.getElementById("musicOrb");
+
+const musicMain =
+  document.getElementById("musicMain");
+
+const musicLabel =
+  document.getElementById("musicLabel");
+
+const trackButton =
+  document.querySelector(".track-orb");
+
+
+/* PLAY / PAUSE */
+
+musicMain.addEventListener(
+  "click",
+  async event => {
+
+    event.stopPropagation();
+
+    musicOrb.classList.toggle("open");
+
+    if(musicAudio.paused){
+
+      try{
+
+        await musicAudio.play();
+
+      }
+      catch(error){
+
+        console.log(
+          "Music could not start:",
+          error
+        );
+
+      }
+
+    }
+    else{
+
+      musicAudio.pause();
+
+    }
+
   }
-};
+);
 
-$("#musicNext").onclick = () => startSong(songIndex + 1, true);
-$("#musicPrev").onclick = () => startSong(songIndex - 1, true);
 
-$("#musicMute").onclick = () => {
-  if(!playerReady) return;
+/* TRACK BUTTON */
 
-  muted = !muted;
+trackButton.addEventListener(
+  "click",
+  async event => {
 
-  if(muted){
-    player.mute();
-    $("#musicMute").textContent = "MUTE";
-  }else{
-    player.unMute();
-    $("#musicMute").textContent = "VOL";
+    event.stopPropagation();
+
+    musicOrb.classList.remove("open");
+
+    try{
+
+      musicAudio.currentTime = 0;
+
+      await musicAudio.play();
+
+    }
+    catch(error){
+
+      console.log(
+        "Music could not start:",
+        error
+      );
+
+    }
+
   }
-};
+);
 
-select.onchange = e => {
-  startSong(Number(e.target.value), true);
-};
 
-/* Gallery lightbox */
-const photos = $$(".photo");
-const lightbox = $("#lightbox");
-const lightboxImg = $("#lightboxImg");
+/* MUSIC STARTED */
+
+musicAudio.addEventListener(
+  "play",
+  () => {
+
+    musicMain.classList.add("playing");
+
+    musicLabel.textContent =
+      "TRACK 01";
+
+  }
+);
+
+
+/* MUSIC PAUSED */
+
+musicAudio.addEventListener(
+  "pause",
+  () => {
+
+    musicMain.classList.remove("playing");
+
+  }
+);
+
+
+/* MUSIC ENDED */
+
+musicAudio.addEventListener(
+  "ended",
+  () => {
+
+    musicMain.classList.remove("playing");
+
+    musicLabel.textContent =
+      "TRACK 01";
+
+  }
+);
+
+
+/* CLOSE MUSIC MENU */
+
+document.addEventListener(
+  "click",
+  event => {
+
+    if(
+      !musicOrb.contains(event.target)
+    ){
+
+      musicOrb.classList.remove("open");
+
+    }
+
+  }
+);
+
+
+/* =========================
+   GALLERY LIGHTBOX
+========================= */
+
+const photos =
+  $$(".photo");
+
+const lightbox =
+  $("#lightbox");
+
+const lightboxImg =
+  $("#lightboxImg");
+
 let galleryIndex = 0;
 
+
 function showGallery(){
-  lightboxImg.src = photos[galleryIndex].querySelector("img").src;
+
+  lightboxImg.src =
+    photos[
+      galleryIndex
+    ].querySelector("img").src;
+
   lightbox.classList.add("open");
+
 }
 
-photos.forEach((photo,index) => {
-  photo.onclick = () => {
-    galleryIndex = index;
-    showGallery();
-  };
-});
 
-$("#lbClose").onclick = () => lightbox.classList.remove("open");
+photos.forEach(
+  (photo,index) => {
 
-$("#lbPrev").onclick = () => {
-  galleryIndex = (galleryIndex - 1 + photos.length) % photos.length;
-  showGallery();
-};
+    photo.onclick = () => {
 
-$("#lbNext").onclick = () => {
-  galleryIndex = (galleryIndex + 1) % photos.length;
-  showGallery();
-};
+      galleryIndex = index;
 
-addEventListener("keydown",event => {
-  if(!lightbox.classList.contains("open")) return;
+      showGallery();
 
-  if(event.key === "Escape") lightbox.classList.remove("open");
-  if(event.key === "ArrowRight") $("#lbPrev").click();
-  if(event.key === "ArrowLeft") $("#lbNext").click();
-});
+    };
 
-/* Easter egg */
-let secret = "";
-addEventListener("keydown",event => {
-  secret = (secret + event.key.toLowerCase()).slice(-4);
-
-  if(secret === "moaz"){
-    alert("Interesting... FILE UNLOCKED.");
-    secret = "";
   }
-});
+);
 
-/* Footer typewriter */
-const footerText = "Thanks for visiting my world.";
+
+$("#lbClose").onclick =
+  () =>
+    lightbox.classList.remove("open");
+
+
+$("#lbPrev").onclick =
+  () => {
+
+    galleryIndex =
+      (
+        galleryIndex - 1
+        + photos.length
+      )
+      % photos.length;
+
+    showGallery();
+
+  };
+
+
+$("#lbNext").onclick =
+  () => {
+
+    galleryIndex =
+      (
+        galleryIndex + 1
+      )
+      % photos.length;
+
+    showGallery();
+
+  };
+
+
+addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      !lightbox.classList.contains("open")
+    ) return;
+
+    if(
+      event.key === "Escape"
+    ){
+
+      lightbox.classList.remove("open");
+
+    }
+
+    if(
+      event.key === "ArrowRight"
+    ){
+
+      $("#lbPrev").click();
+
+    }
+
+    if(
+      event.key === "ArrowLeft"
+    ){
+
+      $("#lbNext").click();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   EASTER EGG
+========================= */
+
+let secret = "";
+
+addEventListener(
+  "keydown",
+  event => {
+
+    secret =
+      (
+        secret
+        + event.key.toLowerCase()
+      ).slice(-4);
+
+    if(secret === "moaz"){
+
+      alert(
+        "Interesting... FILE UNLOCKED."
+      );
+
+      secret = "";
+
+    }
+
+  }
+);
+
+
+/* =========================
+   FOOTER TYPEWRITER
+========================= */
+
+const footerText =
+  "Thanks for visiting my world.";
+
 let typeIndex = 0;
 
+
 function typeWriter(){
-  if(typeIndex < footerText.length){
-    $("#typing").textContent += footerText[typeIndex++];
-    setTimeout(typeWriter,60);
+
+  if(
+    typeIndex < footerText.length
+  ){
+
+    $("#typing").textContent +=
+      footerText[typeIndex++];
+
+    setTimeout(
+      typeWriter,
+      60
+    );
+
   }
+
 }
+
+
 typeWriter();
-
-// Circular floating music control
-const musicOrb = document.getElementById("musicOrb");
-const musicMain = document.getElementById("musicMain");
-const musicLabel = document.getElementById("musicLabel");
-const trackButtons = document.querySelectorAll(".track-orb");
-
-musicMain?.addEventListener("click", (e) => {
-  e.stopPropagation();
-  musicOrb.classList.toggle("open");
-});
-
-trackButtons.forEach(btn => {
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const index = Number(btn.dataset.track);
-    startSong(index, true);
-    trackButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    musicLabel.textContent = "TRACK 0" + (index + 1);
-    musicOrb.classList.remove("open");
-  });
-});
-
-document.addEventListener("click", (e) => {
-  if (!musicOrb.contains(e.target)) musicOrb.classList.remove("open");
-});
-
-trackButtons[0]?.classList.add("active");
 
 </script>
 
