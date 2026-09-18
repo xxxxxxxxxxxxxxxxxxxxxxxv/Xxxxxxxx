@@ -71,7 +71,8 @@ button{
   color:inherit;
 }
 
-img,video{
+img,
+video{
   max-width:100%;
 }
 
@@ -298,10 +299,6 @@ nav.scrolled{
 
 .music-orb.open .track-orb{
   opacity:1;
-  transform:translateY(0) scale(1);
-}
-
-.music-orb.open .track-orb:nth-child(1){
   transform:translateY(0) scale(1);
 }
 
@@ -1019,7 +1016,7 @@ footer{
 
 
 <!-- =========================
-     NAVBAR
+     NAV
 ========================= -->
 
 <nav id="nav">
@@ -1034,25 +1031,15 @@ footer{
 
   <div class="nav-links" id="navLinks">
 
-    <a href="#home">
-      HOME
-    </a>
+    <a href="#home">HOME</a>
 
-    <a href="#about">
-      ABOUT
-    </a>
+    <a href="#about">ABOUT</a>
 
-    <a href="#world">
-      WORLD
-    </a>
+    <a href="#world">WORLD</a>
 
-    <a href="#gallery">
-      GALLERY
-    </a>
+    <a href="#gallery">GALLERY</a>
 
-    <a href="#video">
-      VIDEO
-    </a>
+    <a href="#video">VIDEO</a>
 
   </div>
 
@@ -1100,7 +1087,9 @@ footer{
 </div>
 
 
-<!-- LOCAL MUSIC -->
+<!-- =========================
+     LOCAL MUSIC
+========================= -->
 
 <audio
   id="musicAudio"
@@ -1187,7 +1176,7 @@ footer{
 
       <div
         class="profile"
-        style="background-image:url('assets/images/profile.jpg')"
+        style="background-image:url('assets/images/gallery-4.jpg')"
       ></div>
 
       <div>
@@ -1272,10 +1261,11 @@ footer{
 
   <div class="cards">
 
+
     <article class="card reveal">
 
       <img
-        src="assets/images/coding.jpg"
+        src="assets/images/gallery-1.jpg"
         alt="Coding"
       >
 
@@ -1297,7 +1287,7 @@ footer{
     <article class="card reveal">
 
       <img
-        src="assets/images/anime.jpg"
+        src="assets/images/gallery-2.jpg"
         alt="Anime"
       >
 
@@ -1319,7 +1309,7 @@ footer{
     <article class="card reveal">
 
       <img
-        src="assets/images/music.jpg"
+        src="assets/images/gallery-3.jpg"
         alt="Music"
       >
 
@@ -1341,7 +1331,7 @@ footer{
     <article class="card reveal">
 
       <img
-        src="assets/images/design.jpg"
+        src="assets/images/video-poster.jpg"
         alt="Design"
       >
 
@@ -1363,7 +1353,7 @@ footer{
     <article class="card reveal">
 
       <img
-        src="assets/images/games.jpg"
+        src="assets/images/light.jpg"
         alt="Games"
       >
 
@@ -1403,6 +1393,7 @@ footer{
   <div class="rule"></div>
 
   <div class="gallery">
+
 
     <figure
       class="photo reveal"
@@ -1494,11 +1485,12 @@ footer{
 
   <div class="minds">
 
+
     <article class="mind reveal">
 
       <img
         src="assets/images/light.jpg"
-        alt="Light Yagami"
+        alt="Light"
       >
 
       <div class="mind-info">
@@ -1527,7 +1519,7 @@ footer{
 
       <img
         src="assets/images/l.jpg"
-        alt="L Lawliet"
+        alt="L"
       >
 
       <div class="mind-info">
@@ -1685,10 +1677,7 @@ const SETTINGS = {
     "assets/video/background.mp4",
 
   pageVideo:
-    "assets/video/my-video.mp4",
-
-  profileImage:
-    "assets/images/profile.jpg"
+    "assets/video/my-video.mp4"
 
 };
 
@@ -1785,7 +1774,7 @@ $$(".reveal").forEach(el => {
 
 
 /* =========================
-   LOCAL MUSIC PLAYER
+   LOCAL MUSIC
 ========================= */
 
 const musicAudio =
@@ -1871,7 +1860,7 @@ trackButton.addEventListener(
 );
 
 
-/* MUSIC STARTED */
+/* MUSIC PLAYING */
 
 musicAudio.addEventListener(
   "play",
@@ -1905,9 +1894,6 @@ musicAudio.addEventListener(
   () => {
 
     musicMain.classList.remove("playing");
-
-    musicLabel.textContent =
-      "TRACK 01";
 
   }
 );
